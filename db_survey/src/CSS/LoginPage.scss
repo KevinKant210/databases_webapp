@@ -1,0 +1,22 @@
+@import "./global.scss";
+
+.center-object{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(50%,-50%);
+}
+
+.login-page{
+    background-color: #6d9ac4;
+    max-width: 100vh;
+    max-height: 100vh;
+}
+
+.body-class{
+    background-color: #6d9ac4;
+}
+
+.form-container{
+    margin-top: 10%;
+}

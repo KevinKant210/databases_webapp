@@ -1,0 +1,90 @@
+// @import "../node_modules/bootstrap/scss/functions";
+
+//  $theme-colors: (
+//      "ucf-bgold": #FFC904,
+//      "ucf-mgold": #BA9B37,
+//     "ucf-black": #000000
+    
+// );
+
+
+/* import bootstrap to set changes */
+
+
+// @import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+
+
+
+// Custom.scss
+// Option B: Include parts of Bootstrap
+
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "../../node_modules/bootstrap/scss/functions";
+
+// 2. Include any default variable overrides here
+
+// 3. Include remainder of required Bootstrap stylesheets
+@import "../../node_modules/bootstrap/scss/variables";
+
+// 4. Include any default map overrides here
+
+
+// Merge the maps
+// // Create your own map
+
+
+// // Merge the maps
+
+
+$theme-colors: (
+  "custom-pink": #ED5684,
+  "custom-white": #F4F3EE,
+);
+
+
+
+// 5. Include remainder of required parts
+@import "../../node_modules/bootstrap/scss/maps";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/root";
+
+// 6. Optionally include any other parts as needed
+
+
+// 7. Optionally include utilities API last to generate classes based on the Sass map in `_utilities.scss`
+@import "../../node_modules/bootstrap/scss/utilities";
+
+//add custom widths here following this example
+$custom-width: (
+    65: 65%,
+    60: 60%,
+    80: 80%,
+    35:35%,
+    30:30%,
+    95:95%,
+);
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "width": map-merge(
+      map-get($utilities, "width"),
+      (
+        values: map-merge(
+          map-get(map-get($utilities, "width"), "values"),
+          $custom-width
+          
+          
+        ),
+      ),
+    ),
+  )
+);
+
+
+// 8. Add additional custom code here
+
+// Create your own map
+
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
