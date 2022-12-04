@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { Container,Form,Button, Row, Stack ,Col} from "react-bootstrap";
 import "../CSS/LoginForm.scss"
 
+function queryDB(){
+    
+}
+
 export default function LoginForm(props){
 
     var navigate = useNavigate();
@@ -14,6 +18,8 @@ export default function LoginForm(props){
     const [signUpPasswordConfirm, setSignUpPasswordConfirm] = useState("");
     const [logInEmail,setLogInEmail]= useState("");
     const [logInPassword, setLogInPassword] = useState("");
+
+   
 
     
    const submitLoginIn = () =>{
@@ -43,6 +49,8 @@ export default function LoginForm(props){
     }
 
     setValidated(true);
+
+    //check if if valid login if valid -> go to home page else pop up error
     // navigate(homePath);
    }
 
@@ -190,6 +198,10 @@ export default function LoginForm(props){
 
                     <Button className={"sign-up-button text-white w-75 justify-content-center " + (isLogin ? "" : "d-none")} variant="custom-pink" type="submit" onClick={e => submitLoginIn()}>
                         Login!
+                    </Button>
+
+                    <Button className="btn-primary" variant="custom-pink" onClick={e => queryDB()}>
+                        Test DB
                     </Button>
                 </Container>
 

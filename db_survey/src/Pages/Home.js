@@ -1,6 +1,7 @@
 import React from 'react'
 import {Button, Container} from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import "../CSS/HomePage.scss"
 
 export default function Home(props){
     var navigator = useNavigate();
@@ -10,11 +11,13 @@ export default function Home(props){
         navigator(loginPath);
     }
     return(
-        <Container>
+        <Container fluid className='border'>
             Home Page
+            
             <Button variant='custom-pink' onClick={e => goLogin()}>
                 Go Login
             </Button>
+            
 
         </Container>
     )
