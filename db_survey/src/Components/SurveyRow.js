@@ -1,24 +1,26 @@
-import { Stack } from "react-bootstrap";
+import { Stack,Col } from "react-bootstrap";
 import React from "react";
 import SurveyTile from "./SurveyTile";
 
 export default function SurveyRow(props){
     
-    console.log(props.surveySet);
+   
 
     return(
-    <Stack direction="horizontal" gap={5} className='d-flex justify-content-evenly'>
+    <Stack direction="horizontal" gap={5} className='d-flex '>
                 
 
-                 {/* {props.surveySet.map(survey => (
-                    <SurveyTile title={survey} key={survey}/>
-                 ))} */}
+                 {props.surveySet.map(survey => (
+                    
+                    <SurveyTile title={survey.title} sid={survey.sid} startDate={survey.survey_start} endDate={survey.survey_end} key={survey}/>
+                    
+                 ))}
 
-                 <SurveyTile />
+                 {/* <SurveyTile />
 
                  <SurveyTile/>
 
-                 <SurveyTile/>
+                 <SurveyTile/> */}
 
     </Stack>
     )

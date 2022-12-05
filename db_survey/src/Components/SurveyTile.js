@@ -5,29 +5,38 @@ export default function SurveyTile(props){
 
     //information format
 
+    const startDateString = props.startDate.toString().substring(0,10);
+    const endDateString = props.endDate.toString().substring(0,10);
+
     return(
         <Container>
             <motion.button 
                 whileHover={{scale:1.2}}
                 
                 className="survey-tile-button">
-            <Container className="survey-tile w-100 border rounded-2 border-custom-red m-2 p-1">
+            <Container className="survey-tile  border rounded-2  m-2 p-1 shadow-lg">
                 
                 <Container className="">
                     <Stack>
                         <Container className="overflow-hidden">
-                            Title
+                            
                             {props.title}
                         </Container>
 
                         <Container className="overflow-hidden">
-                            SID
-                            {props.sid}
+                            SID: 
+                            {" " + props.sid}
                         </Container>
 
+                        <Container>
+                            Start Date:
+                            {" " + endDateString}
+                        </Container>
+
+
                         <Container className="overflow-hidden">
-                            End Date
-                            {props.endDate}
+                            End Date: 
+                            {" " + endDateString}
                         </Container>
 
                         

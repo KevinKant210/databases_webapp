@@ -3,6 +3,7 @@ const api = require('./api.js');
 const getUsers = api.getUsers;
 const queryUser = api.queryUser;
 const createUser = api.createUser;
+const getSurveys = api.getSurveys;
 
 const express = require('express');
 const app = express();
@@ -21,6 +22,13 @@ app.get('/query_user/:email',async (req, res, next) => {
     console.log(emailParam);
     data = await queryUser(emailParam);
     res.json(data);
+});
+
+app.get('/getSurveys/:owner/:date/:user',async (req, res, next) => {
+    console.log(req.params.owner,req.params.date,req.params.user);
+    data = await getSurveys(req.params.owner,req.params.date,req.params.user);
+    res.json(data);
+    
 });
 
 app.post('/create_user/:email/:name/:password', async (req,res) => {

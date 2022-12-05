@@ -17,8 +17,8 @@ export default function Home(props){
 
     const location = useLocation();
     const [userEmail, setUserEmail] = useState(location.state.user_email);
-    
-
+    const [sortDateParam, setSortDateParam] = useState("All");
+    const [sortOwnerParam, setSortOwnerParam] = useState("All")
 
     function goLogin(){
         navigator(loginPath);
@@ -38,22 +38,32 @@ export default function Home(props){
                         <Navbar bg='custom-red' className='navbar-class'>
                             <Navbar.Brand className='navbar-class m-1 p-1 h-2'>ToolBar:</Navbar.Brand>
                             <NavDropdown title='Sort By Date' id='nav-dropdown' className='m-2'>
-                                <NavDropdown.Item href="">Sort By Inactive</NavDropdown.Item>
-                                <NavDropdown.Item href="">Sort By Active</NavDropdown.Item>
+                                <NavDropdown.Item href="" onClick={e => setSortDateParam("Inactive")}>Sort By Inactive</NavDropdown.Item>
+                                <NavDropdown.Item href="" onClick={e => setSortDateParam("Active")}>Sort By Active</NavDropdown.Item>
+                                <NavDropdown.Item href="" onClick={e => setSortDateParam("All")}>Show All Surveys</NavDropdown.Item>
                             </NavDropdown>
 
                             <NavDropdown title='Sort By Owner' id='nav-dropdown' className='m-2'>
-                                <NavDropdown.Item href="">Show My Surveys</NavDropdown.Item>
-                                <NavDropdown.Item href="">Show All Surveys</NavDropdown.Item>
+                                <NavDropdown.Item href="" onClick={e => setSortOwnerParam("My")}>Show My Surveys</NavDropdown.Item>
+                                <NavDropdown.Item href="" onClick={e => setSortOwnerParam("All")}>Show All Surveys</NavDropdown.Item>
                             </NavDropdown>
 
-                            <Button variant='custom-white' onClick={e => goLogin()}>
+                            <Button className='m-3' variant='custom-white ' onClick={e => window.location.reload()}>
+                                Refresh
+                            </Button>
+
+                            <Button className="m-3 w-25" variant='custom-white' onClick={e => goLogin()}>
                                 Sign out
                             </Button>
+
+                            <Container className='m-3'>
+                                Showing
+                                {!(sortOwnerParam == sortDateParam) ? " " + sortOwnerParam + " " + sortDateParam: "   All"}
+                            </Container> 
                         </Navbar>
 
                         <Container>
-                            <SurveyTileContainer className='w-100 m-0 p-0' userEmail={userEmail}/>
+                            <SurveyTileContainer className='w-100 m-0 p-0' userEmail={userEmail} sortDateParam={sortDateParam} sortOwnerParam={sortOwnerParam}/>
                         </Container>
                         
                     </Stack>
