@@ -4,6 +4,7 @@ const getUsers = api.getUsers;
 const queryUser = api.queryUser;
 const createUser = api.createUser;
 const getSurveys = api.getSurveys;
+const createSurvey = api.createSurvey;
 
 const express = require('express');
 const app = express();
@@ -31,8 +32,13 @@ app.get('/getSurveys/:owner/:date/:user',async (req, res, next) => {
     
 });
 
-app.post("/createSurvey/:title/:description/:userEmail/:startDate/:endDate/:sid", async (req,res,next) => {
-    res.send("Hey!")
+app.post("/createSurvey/:title/:description/:userEmail/:startDate/:endDate", async (req,res,next) => {
+    try {
+        data = await createSurvey(req.params.title,req.params.description,req.params.userEmail,req.params.startDate,req.params.endDate);
+        res.send("Success");
+    } catch (error) {
+        res.send({error: 'Insert Error!'});
+    }
 });
 
 app.post('/create_user/:email/:name/:password', async (req,res) => {

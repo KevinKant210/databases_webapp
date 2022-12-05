@@ -40,6 +40,23 @@ export async function getSurveys(ownerParams, dateParams,user){
     return isEmpty(data);
 }
 
+export async function createSurvey(titleParam, descriptionParam, userEmail,startDate,endDate){
+    const uri = "http://localhost:3001/createSurvey/"+ titleParam+ "/" + descriptionParam + "/" + userEmail + "/" + startDate + "/" + endDate;
+    
+    const res = await fetch(uri,{
+        method: 'POST',
+    });
+
+    return res;
+}
+
+export async function createUser(emailParam,nameParam,passwordParam){
+    const uri = "http://localhost:3001/create_user/" + emailParam + "/" + nameParam + "/" + passwordParam;
+    const res = await fetch(uri,{
+        method: 'POST',
+    })
+}
+
 function isEmpty(data){
     if(Object.keys(data).length == 0){
         return null;

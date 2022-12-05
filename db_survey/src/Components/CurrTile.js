@@ -2,6 +2,7 @@ import { Container, Stack, Form, Button } from "react-bootstrap";
 import "../CSS/CurrTile.scss"
 import QuestionTileContainer from "./QuestionTileContainer";
 import {React,useState} from "react";
+import { createSurvey } from "../apiCalls";
 
 var survey_info = {
     "sid": 9,
@@ -27,7 +28,14 @@ export default function CurrTile(props) {
     const [showQuestion, setShowQuestion] = useState(false);
 
     
-    
+    function submitNewSurvey(){
+        console.log(title,description,props.userEmail,startDate,endDate);
+        const res = createSurvey(title,description,props.userEmail,startDate,endDate);
+
+        console.log(res);
+
+        setShowQuestion(true);
+    }
 
     return(
         <Container fluid className="login-form p-5 rounded-3 shadow-lg bg-color-class " >
@@ -45,8 +53,8 @@ export default function CurrTile(props) {
                         </Form.Group>
                         <Form.Group className="mb-3 h5" controlId="formTitle">
                             <Form.Label>Title</Form.Label>
-                            <Form.Control type="text"/>
-                            <Form.Text className="text-muted" onChange={e => setTitle(e.target.value)}>
+                            <Form.Control type="text" onChange={e => setTitle(e.target.value)}/>
+                            <Form.Text className="text-muted" >
                             </Form.Text>
                         </Form.Group>
                         <Form.Group className="mb-3 h5" controlId="formDescription">
@@ -66,7 +74,7 @@ export default function CurrTile(props) {
 
                         
 
-                        <Button variant='custom-white' type="button" className="fw-bold mt-3" onClick={e => setShowQuestion(true)}>
+                        <Button variant='custom-white' type="button" className="fw-bold mt-3" onClick={e => submitNewSurvey()}>
                             Submit
                         </Button>
                     </Form>

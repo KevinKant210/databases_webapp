@@ -1,4 +1,4 @@
-import {React,useState} from 'react'
+import {React,useEffect,useState} from 'react'
 import {Button, Container,Row,Col,Stack, Navbar, NavDropdown} from 'react-bootstrap'
 import { useLocation, useNavigate } from 'react-router-dom'
 import CurrTileContainer from '../Components/CurrTileContainer';
@@ -24,10 +24,17 @@ export default function Home(props){
     const [sortOwnerParam, setSortOwnerParam] = useState("All");
     //0 indicates a new survey is being created
     const [currSurvey, setCurrSurvey] = useState(0);
-
+    
     function goLogin(){
         navigator(loginPath);
-    }
+    }   
+
+    useEffect( () => {
+        console.log(currSurvey);
+
+        
+
+    },[currSurvey]);
 
     return(
         <Container fluid className='border d-flex home-page-container'>
@@ -80,7 +87,7 @@ export default function Home(props){
                 </Col>
 
                 <Col  className='curr-container w-40  border'>
-                    {currSurvey == 0 ? <CurrTileContainer/> : <ResultsTileContainer/>}
+                    {currSurvey == 0 ? <CurrTileContainer userEmail={userEmail}/> : <ResultsTileContainer/>}
                     
                 </Col>
             </Row>

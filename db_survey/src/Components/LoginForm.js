@@ -2,7 +2,7 @@ import {isValidElement, React,useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { Container,Form,Button, Row, Stack ,Col} from "react-bootstrap";
 import "../CSS/LoginForm.scss"
-import { getUsers ,queryUser} from "../apiCalls";
+import { getUsers ,queryUser,createUser} from "../apiCalls";
 
 
 export default function LoginForm(props){
@@ -132,6 +132,13 @@ export default function LoginForm(props){
 
     setValidated(true);
 
+    const res = createUser(signUpEmail,"name",signUpPassword).then((result) =>{
+        navigate("/Home",{
+            state:{
+                user_email: signUpEmail
+            }
+        });
+    })
     //Here is wher you would make sign up request through API to databse
    }
 
@@ -223,17 +230,17 @@ export default function LoginForm(props){
                 </Container>
                 
                 <Container className="d-flex justify-content-center">
-                    <Button className= {"sign-up-button text-white w-75 justify-content-center " + (!isLogin ? "" : "d-none")} variant="custom-pink" type="submit" onClick={e => submitSignUp()}>
+                    <Button className= {"sign-up-button text-white w-50 justify-content-center " + (!isLogin ? "" : "d-none")} variant="custom-pink" type="submit" onClick={e => submitSignUp()}>
                         Sign Up!
                     </Button>
 
-                    <Button className={"sign-up-button text-white w-75 justify-content-center " + (isLogin ? "" : "d-none")} variant="custom-pink" type="submit" onClick={e => submitLoginIn()}>
+                    <Button className={"sign-up-button text-white w-50 justify-content-center " + (isLogin ? "" : "d-none")} variant="custom-pink" type="submit" onClick={e => submitLoginIn()}>
                         Login!
                     </Button>
 
-                    <Button className="btn-primary" variant="custom-pink" onClick={e => testDB()}>
+                    {/* <Button className="btn-primary" variant="custom-pink" onClick={e => testDB()}>
                         Test DB
-                    </Button>
+                    </Button> */}
                 </Container>
 
                 <Container className="">

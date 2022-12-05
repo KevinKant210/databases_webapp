@@ -12,7 +12,7 @@ export default function SurveyRow(props){
 
                  {props.surveySet.map(survey => (
                     
-                    <SurveyTile title={survey.title} sid={survey.sid} startDate={survey.survey_start} endDate={survey.survey_end} key={survey}/>
+                    <SurveyTile title={survey.title} sid={survey.sid} startDate={survey.survey_start} endDate={survey.survey_end} setCurrSurvey={props.setCurrSurvey}key={survey}/>
                     
                  ))}
 

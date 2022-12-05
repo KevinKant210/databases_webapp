@@ -13,7 +13,7 @@ export default function SurveyTileContainer(props){
     const [isLoading, setLoading] = useState(true);
     const [surveySets, setSurveySets] = useState([]);
    
-    const setCurrSurvey = props.setCurrSurvey;
+    
 
     useEffect( () => {
         const tempSets = []
@@ -52,7 +52,7 @@ export default function SurveyTileContainer(props){
                 
                 
                 {surveySets.length == 0 ? "No Surveys !" :  surveySets.map(surveySet =>  (
-                    <SurveyRow surveySet={surveySet} key={surveySet}/>
+                    <SurveyRow surveySet={surveySet} key={surveySet} setCurrSurvey={props.setCurrSurvey}/>
                 ))}
                 
                

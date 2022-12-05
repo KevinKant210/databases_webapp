@@ -8,11 +8,13 @@ export default function SurveyTile(props){
     const startDateString = props.startDate.toString().substring(0,10);
     const endDateString = props.endDate.toString().substring(0,10);
 
+    
+
     return(
         <Container>
             <motion.button 
                 whileHover={{scale:1.2}}
-                
+                onClick={e => props.setCurrSurvey(props.sid)}
                 className="survey-tile-button">
             <Container className="survey-tile  border rounded-2  m-2 p-1 shadow-lg">
                 
