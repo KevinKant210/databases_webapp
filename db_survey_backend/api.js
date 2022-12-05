@@ -123,7 +123,12 @@ async function getSurveys(ownerParams, dateParams, userEmail){
     return data;
 }
 
+async function createSurvey(titleParam, descriptionParam, userEmail,startDate,endDate,sid){
+
+}
+
 module.exports.getUsers = getUsers ;
 module.exports.queryUser = queryUser;
 module.exports.createUser = createUser;
 module.exports.getSurveys = getSurveys;
+module.exports.createSurvey = createSurvey;

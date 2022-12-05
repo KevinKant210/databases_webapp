@@ -31,6 +31,10 @@ app.get('/getSurveys/:owner/:date/:user',async (req, res, next) => {
     
 });
 
+app.post("/createSurvey/:title/:description/:userEmail/:startDate/:endDate/:sid", async (req,res,next) => {
+    res.send("Hey!")
+});
+
 app.post('/create_user/:email/:name/:password', async (req,res) => {
     const [emailParams,nameParams,passwordParams] = [req.params.email,req.params.name,req.params.password];
     console.log(emailParams,nameParams,passwordParams);

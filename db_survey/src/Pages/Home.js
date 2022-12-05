@@ -2,7 +2,10 @@ import {React,useState} from 'react'
 import {Button, Container,Row,Col,Stack, Navbar, NavDropdown} from 'react-bootstrap'
 import { useLocation, useNavigate } from 'react-router-dom'
 import CurrTileContainer from '../Components/CurrTileContainer';
+import QuestionTileContainer from '../Components/QuestionTileContainer';
+import ResultsTile from '../Components/ResultsTile';
 import SurveyTile from '../Components/SurveyTile';
+import ResultsTileContainer from '../Components/ResultsTileContainer';
 import SurveyTileContainer from '../Components/SurveyTilesContainer';
 import "../CSS/HomePage.scss"
 
@@ -18,7 +21,9 @@ export default function Home(props){
     const location = useLocation();
     const [userEmail, setUserEmail] = useState(location.state.user_email);
     const [sortDateParam, setSortDateParam] = useState("All");
-    const [sortOwnerParam, setSortOwnerParam] = useState("All")
+    const [sortOwnerParam, setSortOwnerParam] = useState("All");
+    //0 indicates a new survey is being created
+    const [currSurvey, setCurrSurvey] = useState(0);
 
     function goLogin(){
         navigator(loginPath);
@@ -52,7 +57,11 @@ export default function Home(props){
                                 Refresh
                             </Button>
 
-                            <Button className="m-3 w-25" variant='custom-white' onClick={e => goLogin()}>
+                            <Button className='m-3 w-100' variant='custom-white' onClick={e => setCurrSurvey(0)}>
+                                Create Survey
+                            </Button>
+
+                            <Button className="m-3 w-75" variant='custom-white' onClick={e => goLogin()}>
                                 Sign out
                             </Button>
 
@@ -63,7 +72,7 @@ export default function Home(props){
                         </Navbar>
 
                         <Container>
-                            <SurveyTileContainer className='w-100 m-0 p-0' userEmail={userEmail} sortDateParam={sortDateParam} sortOwnerParam={sortOwnerParam}/>
+                            <SurveyTileContainer className='w-100 m-0 p-0' userEmail={userEmail} sortDateParam={sortDateParam} sortOwnerParam={sortOwnerParam} setCurrSurvey={setCurrSurvey}/>
                         </Container>
                         
                     </Stack>
@@ -71,7 +80,8 @@ export default function Home(props){
                 </Col>
 
                 <Col  className='curr-container w-40  border'>
-                    <CurrTileContainer/>
+                    {currSurvey == 0 ? <CurrTileContainer/> : <ResultsTileContainer/>}
+                    
                 </Col>
             </Row>
             

@@ -1,5 +1,5 @@
 import { Container, Stack, Form, Button } from "react-bootstrap";
-import React from "react";
+import {React,useState} from "react";
 import QuestionTile from "./QuestionTile";
 import "../CSS/CurrTile.scss"
 
@@ -7,6 +7,10 @@ export default function QuestionRow(props){
     
     console.log(props.surveySet);
 
+    const [question,setQuestion] = useState("");
+    
+
+    
     return(
         <Container  fluid className="login-form p-3 rounded-4 shadow-lg bg-color-class ">
             <Container>
@@ -16,7 +20,7 @@ export default function QuestionRow(props){
                     <Form className="login-form p-3 rounded-4 shadow-lg bg-light-blue-color-class" >
                         <Form.Group className="mb-3 h5" controlId="formQuestion">
                             <Form.Label>Enter Question</Form.Label>
-                            <Form.Control as="textarea" rows={2}/>
+                            <Form.Control as="textarea" rows={2} onChange={e => setQuestion(e.target.value)}/>
                             <Form.Text className="text-muted">
                             </Form.Text>
                         </Form.Group>
