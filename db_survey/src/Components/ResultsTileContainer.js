@@ -1,13 +1,13 @@
 import { Container } from "react-bootstrap"
-import CurrTile from "./CurrTile.js"
+import ResultsRow from "./ResultsRow.js"
 
-export default function CurrTileContainer(props){
+export default function ResultsTileContainer(props){
 
     return(
         <Container>
-            <CurrTile>
+            <ResultsRow>
                 Current Tile Goes Here
-            </CurrTile>
+            </ResultsRow>
         </Container>
     )
 }
