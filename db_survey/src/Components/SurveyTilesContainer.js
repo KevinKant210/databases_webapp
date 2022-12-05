@@ -18,10 +18,15 @@ export default function SurveyTileContainer(props){
     useEffect( () => {
         const tempSets = []
         var data = getSurveys(props.sortOwnerParam, props.sortDateParam,props.userEmail).then((res) => {
-            for(var i = 0; i < res.length; i+=3){
+            if(res == null) {
+                
+            }else{
+                for(var i = 0; i < res.length; i+=3){
                 tempSets.push(res.slice(i,i+3));
                 
             }
+            }
+            
 
             setSurveySets(tempSets);
         });
@@ -41,14 +46,14 @@ export default function SurveyTileContainer(props){
     
 
     return (
-        <Container className=" border d-flex  survey-container ">
+        <Container className=" d-flex  survey-container ">
 
             <Stack>
                 
                 
-                { surveySets.map(surveySet =>  (
+                {surveySets.length == 0 ? "No Surveys !" :  surveySets.map(surveySet =>  (
                     <SurveyRow surveySet={surveySet} key={surveySet}/>
-                ))};
+                ))}
                 
                
 
