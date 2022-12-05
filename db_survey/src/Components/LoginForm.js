@@ -2,15 +2,13 @@ import {isValidElement, React,useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { Container,Form,Button, Row, Stack ,Col} from "react-bootstrap";
 import "../CSS/LoginForm.scss"
+import { getUsers ,queryUser} from "../apiCalls";
 
-function queryDB(){
-    
-}
 
 export default function LoginForm(props){
 
     var navigate = useNavigate();
-    const homePath = "/Home";
+    
     const [isLogin,setIsLogin] = useState(!false);
     const [validated,setValidated] = useState();
     const [signUpEmail, setSignUpEmail] = useState("");
@@ -19,8 +17,14 @@ export default function LoginForm(props){
     const [logInEmail,setLogInEmail]= useState("");
     const [logInPassword, setLogInPassword] = useState("");
 
-   
 
+    async function testDB(){
+
+        const res = await queryUser("user1111@gmail.com");
+        
+       
+    }
+   
     
    const submitLoginIn = () =>{
     const loginEmailTag = document.getElementById("formLoginEmail");
@@ -48,8 +52,35 @@ export default function LoginForm(props){
         loginPasswordTag.setCustomValidity("");
     }
 
-    setValidated(true);
+    
 
+    const res = queryUser(logInEmail).then((value) => {
+        if(value == null){
+            setValidated(false)
+            loginEmailTag.setCustomValidity("Invalid Email");
+            loginEmailTag.reportValidity();
+        }else{
+            if(value[0].password === logInPassword){
+                setValidated(true);
+
+                navigate("/Home",{
+                    state:{
+                        user_email: logInEmail
+                    }
+                });
+
+            }else{
+                setValidated(false);
+                loginPasswordTag.setCustomValidity("Invalid Username Password");
+                loginPasswordTag.reportValidity();
+            }
+            
+        }
+    })
+
+
+
+    setValidated(true);
     //check if if valid login if valid -> go to home page else pop up error
     // navigate(homePath);
    }
@@ -200,7 +231,7 @@ export default function LoginForm(props){
                         Login!
                     </Button>
 
-                    <Button className="btn-primary" variant="custom-pink" onClick={e => queryDB()}>
+                    <Button className="btn-primary" variant="custom-pink" onClick={e => testDB()}>
                         Test DB
                     </Button>
                 </Container>
