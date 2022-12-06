@@ -1,13 +1,29 @@
 import { Container, Stack, Form, Button } from "react-bootstrap";
-import {React,useState} from "react";
+import {React,useEffect,useState} from "react";
 import QuestionTile from "./QuestionTile";
+import { addQuestion } from "../apiCalls";
 import "../CSS/CurrTile.scss"
 
 export default function QuestionRow(props){
     
-    console.log(props.surveySet);
+    
 
     const [question,setQuestion] = useState("");
+    const [currType, setCurrType] = useState(1);
+    const [qnum,setQnum] = useState(1);
+
+    
+
+    function handleQuestionSubmit(){
+       
+        var data = addQuestion(props.sid,qnum,question,currType).then((res)=>{
+            setQnum(qnum+1);
+
+        })
+
+        document.getElementById("formQuestion").value = "";
+        
+    }
     
 
     
@@ -20,7 +36,7 @@ export default function QuestionRow(props){
                     <Form className="login-form p-3 rounded-4 shadow-lg bg-light-blue-color-class" >
                         <Form.Group className="mb-3 h5" controlId="formQuestion">
                             <Form.Label>Enter Question</Form.Label>
-                            <Form.Control as="textarea" rows={2} onChange={e => setQuestion(e.target.value)}/>
+                            <Form.Control as="textarea" rows={2} onChange={e => setQuestion(e.target.value)  }/>
                             <Form.Text className="text-muted">
                             </Form.Text>
                         </Form.Group>
@@ -34,6 +50,7 @@ export default function QuestionRow(props){
                                             name="group1"
                                             type={type}
                                             id={`inline-${type}-1`}
+                                            onChange={e => setCurrType(1)}
                                         />
                                         <Form.Check
                                             inline
@@ -41,11 +58,13 @@ export default function QuestionRow(props){
                                             name="group1"
                                             type={type}
                                             id={`inline-${type}-2`}
+                                            onChange={e => setCurrType(2)}
                                         />
                                     </div>
                                 ))}
                             </Form>
-                        <Button variant='custom-white' type="submit" className="fw-bold mt-3">
+
+                        <Button variant='custom-white' type="button" className="fw-bold mt-3"  onClick={e => handleQuestionSubmit()}>
                             Add Question
                         </Button>
                     </Form>

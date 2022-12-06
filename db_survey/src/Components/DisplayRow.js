@@ -4,10 +4,11 @@ import React from "react";
 
 export default function DisplayRow(props){
     const question = props.question
-    console.log(question);
+    
 
     function clicked(){
         console.log("click");
+        props.setCurrQuestion(question.qnum);
     }
 
 

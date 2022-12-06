@@ -40,8 +40,8 @@ export async function getSurveys(ownerParams, dateParams,user){
     return isEmpty(data);
 }
 
-export async function createSurvey(titleParam, descriptionParam, userEmail,startDate,endDate){
-    const uri = "http://localhost:3001/createSurvey/"+ titleParam+ "/" + descriptionParam + "/" + userEmail + "/" + startDate + "/" + endDate;
+export async function createSurvey(sid,titleParam, descriptionParam, userEmail,startDate,endDate){
+    const uri = "http://localhost:3001/createSurvey/"+ sid+ "/" + titleParam+ "/" + descriptionParam + "/" + userEmail + "/" + startDate + "/" + endDate;
     
     const res = await fetch(uri,{
         method: 'POST',
@@ -85,6 +85,31 @@ export async function getQuestions(sid){
 
     return isEmpty(data);
 } 
+
+export async function getNewSid(){
+    const uri = 'http://localhost:3001/getNewSid'
+    const data = await fetch(uri).then(res => {
+        const data = res.json();
+        return data
+    }).then((data) =>{
+        
+        
+
+        return data;
+    })
+
+    return isEmpty(data);
+}
+
+export async function addQuestion(sid,qnum,question,type){
+    const uri = "http://localhost:3001/create_question/"+ sid + "/" + qnum + "/" +  question + "/"+type
+    
+    const res = await fetch(uri,{
+        method: 'POST',
+    });
+
+    return res;
+}
 
 function isEmpty(data){
     if(Object.keys(data).length == 0){

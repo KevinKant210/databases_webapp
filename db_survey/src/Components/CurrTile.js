@@ -2,7 +2,7 @@ import { Container, Stack, Form, Button } from "react-bootstrap";
 import "../CSS/CurrTile.scss"
 import QuestionTileContainer from "./QuestionTileContainer";
 import {React,useState} from "react";
-import { createSurvey } from "../apiCalls";
+import { createSurvey, getNewSid } from "../apiCalls";
 import QuestionRow from "./QuestionRow";
 
 var survey_info = {
@@ -27,13 +27,26 @@ export default function CurrTile(props) {
     const [description, setDescription] = useState("");
     const [title,setTitle] = useState("");
     const [showQuestion, setShowQuestion] = useState(false);
+    const [sid,setSid] = useState(1);
 
     
     function submitNewSurvey(){
         console.log(title,description,props.userEmail,startDate,endDate);
-        const res = createSurvey(title,description,props.userEmail,startDate,endDate);
+        const fetchSid = getNewSid().then((res)=>{
+            
+            var sid = res[0].SID + 1;
 
-        console.log(res);
+
+            const create_survey = createSurvey(sid,title,description,props.userEmail,startDate,endDate);
+
+            setSid(sid);
+
+        })
+        
+
+        
+
+        
 
         setShowQuestion(true);
     }
@@ -82,7 +95,7 @@ export default function CurrTile(props) {
                 </Container>
             </Stack>
             <Container className={!showQuestion ? "d-none" : ""}>
-                <QuestionRow />
+                <QuestionRow sid={sid} />
                 <Button variant="custom-white" onClick={e => setShowQuestion(false)} className="m-4">
                     Done
                 </Button>

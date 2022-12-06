@@ -123,12 +123,12 @@ async function getSurveys(ownerParams, dateParams, userEmail){
     return data;
 }
 
-async function createSurvey(titleParam, descriptionParam, userEmail,startDate,endDate){
+async function createSurvey(sid,titleParam, descriptionParam, userEmail,startDate,endDate){
     const mysql = require('mysql2/promise');
 
-    const newSID = await getNewSID().then((data) =>{
-        return data[0][0].SID + 1;
-    });
+    // const newSID = await getNewSID().then((data) =>{
+    //     return data[0][0].SID + 1;
+    // });
 
     
 
@@ -145,7 +145,7 @@ async function createSurvey(titleParam, descriptionParam, userEmail,startDate,en
     
     const [data] = await connection.execute(
         'INSERT INTO `surveys` values (?,?,?,?,?,?)',
-        [newSID,userEmail,titleParam,descriptionParam,startDate,endDate], (error,results)=> {
+        [sid ,userEmail,titleParam,descriptionParam,startDate,endDate], (error,results)=> {
             if(error) return res.json({error: error})
         });
     
@@ -201,6 +201,8 @@ async function getQuestions(SID){
     return data;
 }
 
+
+
 async function getOwner(SID){
     const mysql = require('mysql2/promise');
 
@@ -221,6 +223,39 @@ async function getOwner(SID){
     return data;
 }
 
+async function createQuestion(sid,qnum,question,type){
+    const mysql = require('mysql2/promise');
+
+    // const newSID = await getNewSID().then((data) =>{
+    //     return data[0][0].SID + 1;
+    // });
+
+   
+
+    const connection = await mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        port:"3306",
+        password:'password',
+        database:'mydb',
+    });
+
+   
+    
+    
+    const [data] = await connection.execute(
+        'INSERT INTO `questions` values (?,?,?,?)',
+        [sid,qnum,question,type], (error,results)=> {
+            if(error) return console.log(results)
+        });
+    
+
+    connection.end();
+    
+
+    return data;
+}
+
 module.exports.getUsers = getUsers ;
 module.exports.queryUser = queryUser;
 module.exports.createUser = createUser;
@@ -228,3 +263,5 @@ module.exports.getSurveys = getSurveys;
 module.exports.createSurvey = createSurvey;
 module.exports.getQuestions = getQuestions;
 module.exports.getOwner = getOwner;
+module.exports.getNewSID = getNewSID;
+module.exports.createQuestion = createQuestion;

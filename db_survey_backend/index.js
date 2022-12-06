@@ -7,6 +7,8 @@ const getSurveys = api.getSurveys;
 const createSurvey = api.createSurvey;
 const getQuestions = api.getQuestions;
 const getOwner = api.getOwner;
+const getNewSID = api.getNewSID;
+const createQuestion = api.createQuestion;
 
 const express = require('express');
 const app = express();
@@ -48,9 +50,18 @@ app.get('/getOwner/:sid',async (req, res, next) => {
     
 });
 
-app.post("/createSurvey/:title/:description/:userEmail/:startDate/:endDate", async (req,res,next) => {
+app.get('/getNewSid',async (req, res, next) => {
+    
+    data = await getNewSID();
+    
+    res.json(data[0]);
+    
+    
+});
+
+app.post("/createSurvey/:sid/:title/:description/:userEmail/:startDate/:endDate", async (req,res,next) => {
     try {
-        data = await createSurvey(req.params.title,req.params.description,req.params.userEmail,req.params.startDate,req.params.endDate);
+        data = await createSurvey(req.params.sid,req.params.title,req.params.description,req.params.userEmail,req.params.startDate,req.params.endDate);
         res.send("Success");
     } catch (error) {
         res.send({error: 'Insert Error!'});
@@ -67,6 +78,23 @@ app.post('/create_user/:email/:name/:password', async (req,res) => {
         res.send("Success");
     } catch (error) {
         res.send({error: 'Insert Error!'});
+    }
+    // data = await createUser(emailParams,nameParams,passwordParams);
+    
+    
+});
+
+app.post('/create_question/:sid/:qnum/:question/:type', async (req,res) => {
+    
+    
+
+
+    try {
+        console.log("going");
+        data = await createQuestion(req.params.sid,req.params.qnum,req.params.question,req.params.type)
+        res.send("Success");
+    } catch (error) {
+        res.send(error);
     }
     // data = await createUser(emailParams,nameParams,passwordParams);
     
