@@ -5,7 +5,7 @@ import "../CSS/CurrTile.scss"
 
 export default function ResultsRow(props){
     
-    console.log(props.surveySet);
+    console.log(props.info);
 
     return(
         <Container  fluid className="login-form p-3 rounded-4 shadow-lg bg-color-class ">

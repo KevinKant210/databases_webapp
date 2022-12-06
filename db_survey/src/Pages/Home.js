@@ -8,6 +8,9 @@ import SurveyTile from '../Components/SurveyTile';
 import ResultsTileContainer from '../Components/ResultsTileContainer';
 import SurveyTileContainer from '../Components/SurveyTilesContainer';
 import "../CSS/HomePage.scss"
+import DisplayContainer from '../Components/DisplayContainer';
+import { getOwner, getQuestions } from '../apiCalls';
+import ResultsRow from '../Components/ResultsRow';
 
 export default function Home(props){
 
@@ -25,14 +28,24 @@ export default function Home(props){
     //0 indicates a new survey is being created
     const [currSurvey, setCurrSurvey] = useState(0);
     
+    
+    const [info,setInfo] = useState(null);
+
+    var isOwner = false;
+    var component = (info) =>{
+        return <ResultsTile info={info}/>
+    }
+    
     function goLogin(){
         navigator(loginPath);
     }   
 
     useEffect( () => {
-        console.log(currSurvey);
 
-        
+
+        console.log("Curr survey ", currSurvey);
+       
+       
 
     },[currSurvey]);
 
@@ -87,8 +100,27 @@ export default function Home(props){
                 </Col>
 
                 <Col  className='curr-container w-40  border'>
-                    {currSurvey == 0 ? <CurrTileContainer userEmail={userEmail}/> : <ResultsTileContainer/>}
+                    {/* {!showQuestions ? <CurrTileContainer userEmail={userEmail}/> : <ResultsTileContainer currSurvey={currSurvey} userEmail={userEmail}/>} */}
+                    <Container className={currSurvey == 0 ? "" : "d-none"}>
+                        <CurrTileContainer userEmail={userEmail}  />
+                    </Container>
                     
+                    <Container fluid className={currSurvey != 0 ? "" : "d-none"}>
+                         {/* <ResultsTileContainer currSurvey={currSurvey} userEmail={userEmail} className={currSurvey == 0 ? "d-none" : ""} /> */}
+                         <DisplayContainer currSurvey={currSurvey} userEmail={userEmail} />
+                            
+                                {/* <ResultsTileContainer info={info} currSurvey={currSurvey} userEmail={userEmail} /> */}
+
+                                
+
+
+                            
+                         <Container>
+
+                         </Container>
+                         
+                    </Container>
+                   
                 </Col>
             </Row>
             

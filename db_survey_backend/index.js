@@ -5,6 +5,8 @@ const queryUser = api.queryUser;
 const createUser = api.createUser;
 const getSurveys = api.getSurveys;
 const createSurvey = api.createSurvey;
+const getQuestions = api.getQuestions;
+const getOwner = api.getOwner;
 
 const express = require('express');
 const app = express();
@@ -28,6 +30,20 @@ app.get('/query_user/:email',async (req, res, next) => {
 app.get('/getSurveys/:owner/:date/:user',async (req, res, next) => {
     console.log(req.params.owner,req.params.date,req.params.user);
     data = await getSurveys(req.params.owner,req.params.date,req.params.user);
+    res.json(data);
+    
+});
+
+app.get('/getQuestions/:sid',async (req, res, next) => {
+    
+    data = await getQuestions(req.params.sid);
+    res.json(data);
+    
+});
+
+app.get('/getOwner/:sid',async (req, res, next) => {
+    
+    data = await getOwner(req.params.sid);
     res.json(data);
     
 });

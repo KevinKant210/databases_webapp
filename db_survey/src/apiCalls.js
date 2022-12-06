@@ -56,6 +56,35 @@ export async function createUser(emailParam,nameParam,passwordParam){
         method: 'POST',
     })
 }
+export async function getOwner(sid){
+    const uri = 'http://localhost:3001/getOwner/' + sid;
+    const data = await fetch(uri).then(res => {
+        const data = res.json();
+        return data
+    }).then((data) =>{
+        
+        
+
+        return data;
+    })
+
+    return isEmpty(data);
+}
+
+export async function getQuestions(sid){
+    const uri = 'http://localhost:3001/getQuestions/' + sid;
+    const data = await fetch(uri).then(res => {
+        const data = res.json();
+        return data
+    }).then((data) =>{
+        
+        
+
+        return data;
+    })
+
+    return isEmpty(data);
+} 
 
 function isEmpty(data){
     if(Object.keys(data).length == 0){

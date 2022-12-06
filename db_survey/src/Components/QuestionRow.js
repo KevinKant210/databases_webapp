@@ -55,7 +55,7 @@ export default function QuestionRow(props){
                             <SurveyTile title={survey} key={survey}/>
                         ))} */}
                         
-                        <QuestionTile />
+                       
 
             </Stack>
         </Container>

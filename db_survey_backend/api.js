@@ -1,6 +1,6 @@
 
  
- async function getUsers(req, res){
+async function getUsers(req, res){
     const mysql = require('mysql2/promise');
 
 
@@ -180,8 +180,51 @@ async function getNewSID(){
 
     return newSID;
 }
+
+async function getQuestions(SID){
+    const mysql = require('mysql2/promise');
+
+
+    const connection = await mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        port:"3306",
+        password:'password',
+        database:'mydb',
+    });
+
+    const [data] = await connection.execute('SELECT * FROM `questions` WHERE surveys_sid = ?', [SID]);
+
+    connection.end();
+    
+
+    return data;
+}
+
+async function getOwner(SID){
+    const mysql = require('mysql2/promise');
+
+
+    const connection = await mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        port:"3306",
+        password:'password',
+        database:'mydb',
+    });
+
+    const [data] = await connection.execute('SELECT `user_email` FROM `surveys` WHERE sid = ?', [SID]);
+
+    connection.end();
+    
+
+    return data;
+}
+
 module.exports.getUsers = getUsers ;
 module.exports.queryUser = queryUser;
 module.exports.createUser = createUser;
 module.exports.getSurveys = getSurveys;
 module.exports.createSurvey = createSurvey;
+module.exports.getQuestions = getQuestions;
+module.exports.getOwner = getOwner;

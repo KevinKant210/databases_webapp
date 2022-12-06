@@ -3,6 +3,7 @@ import "../CSS/CurrTile.scss"
 import QuestionTileContainer from "./QuestionTileContainer";
 import {React,useState} from "react";
 import { createSurvey } from "../apiCalls";
+import QuestionRow from "./QuestionRow";
 
 var survey_info = {
     "sid": 9,
@@ -81,7 +82,7 @@ export default function CurrTile(props) {
                 </Container>
             </Stack>
             <Container className={!showQuestion ? "d-none" : ""}>
-                <QuestionTileContainer />
+                <QuestionRow />
                 <Button variant="custom-white" onClick={e => setShowQuestion(false)} className="m-4">
                     Done
                 </Button>
